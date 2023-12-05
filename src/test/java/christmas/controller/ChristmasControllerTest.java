@@ -69,7 +69,13 @@ class ChristmasControllerTest {
     @DisplayName("날짜에 대한 예외 발생시 반복 입력 확인")
     @Test
     void run_withInvalidDate() {
-        command("a", "", "123", "32", "0", "25");
+        command(
+                "a", // 문자가 입력된 경우
+                "", // 아무 입력도 없는 경우
+                "123", // 범위를 초과하는 입력인 경우
+                "32", // 범위를 초과하는 입력인 경우
+                "0" // 범위를 초과하는 입력인 경우
+        );
         try {
             assertTimeoutPreemptively(Duration.ofSeconds(1L), christmasController()::run);
         } catch (NoSuchElementException ignored) {
