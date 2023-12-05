@@ -1,5 +1,6 @@
 package christmas.service.discount.strategy;
 
+import christmas.constant.Date;
 import christmas.domain.Customer;
 
 public class SpecialDiscountStrategy implements DiscountStrategy {
@@ -7,6 +8,9 @@ public class SpecialDiscountStrategy implements DiscountStrategy {
 
     @Override
     public int calculateDiscountAmount(Customer customer) {
-        return DISCOUNT_AMOUNT;
+        if (Date.SPECIAL_DAYS.contains(customer.getDayOfMonth())) {
+            return DISCOUNT_AMOUNT;
+        }
+        return ZERO_DISCOUNT_AMOUNT;
     }
 }

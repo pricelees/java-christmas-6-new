@@ -1,5 +1,6 @@
 package christmas.service.discount.strategy;
 
+import christmas.constant.Date;
 import christmas.constant.Menu.Category;
 import christmas.domain.Customer;
 
@@ -8,6 +9,9 @@ public class WeekdayDiscountStrategy implements DiscountStrategy {
 
     @Override
     public int calculateDiscountAmount(Customer customer) {
-        return customer.calculateMenuCountOf(Category.DESSERTS) * DEFAULT_DISCOUNT_AMOUNT;
+        if (Date.WEEKDAYS.contains(customer.getDayOfWeek())) {
+            return customer.calculateMenuCountOf(Category.DESSERTS) * DEFAULT_DISCOUNT_AMOUNT;
+        }
+        return ZERO_DISCOUNT_AMOUNT;
     }
 }

@@ -9,7 +9,10 @@ public class ChristmasDiscountStrategy implements DiscountStrategy {
 
     @Override
     public int calculateDiscountAmount(Customer customer) {
-        return DISCOUNT_AMOUNT_PER_DAY * (customer.getDayOfMonth() - Date.EVENT_START_DAY_OF_MONTH)
-                + DEFAULT_DISCOUNT_AMOUNT;
+        if (customer.getDayOfMonth() <= Date.CHRISTMAS) {
+            return DISCOUNT_AMOUNT_PER_DAY * (customer.getDayOfMonth() - Date.EVENT_START_DAY_OF_MONTH)
+                    + DEFAULT_DISCOUNT_AMOUNT;
+        }
+        return ZERO_DISCOUNT_AMOUNT;
     }
 }
